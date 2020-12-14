@@ -49,6 +49,7 @@
     var json_config;
     $.getJSON("config.json", function(response) {
         json_config = response;
+        console.log(response)
     });
     console.log(json_config)
     var query_dict = {}
