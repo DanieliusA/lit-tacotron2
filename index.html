@@ -32,8 +32,8 @@
                         <p>Apklausa yra skirta įvertinti bei palyginti sintezuotos kalbos rezultatus, gautus ištreniravus Tacotron2 bei Waveglow modelius, naudojant skirtingus parametrus.</p>
                         <p>Kaip atlikti apklausą?</p>
                         <ol>
-                            <li> Perklausykite garso poras kairėje</li>
-                            <li> Įvertinkite, kuris iš dviejų garsų yra priimtinesnis(Skamba natūraliau)</li>
+                            <li> Išklausykite garso poras pateiktas žemiau</li>
+                            <li> Įvertinkite, kuris iš dviejų garsų yra priimtinesnis</li>
                         </ol>
                         Garso įrašų poros
                     </div>
@@ -48,15 +48,15 @@
     <script>
     json_config = {
         "test1": {
-            "description": "A ir B scenariju palyginimas",
+            "description": "A (didžiosios/mažosios - nekirčiuotos) ir B (mažosios - nekirčiuotos) scenarijų palyginimas.",
             "path_sc_1": "examples/default/",
             "path_sc_2": "examples/lowercase/",
             "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSeQXRYXoiHF7--W8Dv_ywKMfuLHaGFc9N1Zy9X7Q-1-Mx0vwA/viewform?embedded=true"
         },
         "test2": {
-            "description": "C ir D scenariju palyginimas",
-            "path_sc_1": "examples/krc/",
-            "path_sc_2": "examples/krc2/",
+            "description": "C (mažosios - kirčiuotos) ir D (mažosios - kirčiuotos + fonemos) scenarijų palyginimas.",
+            "path_sc_1": "examples/lower-krc/",
+            "path_sc_2": "examples/lower-krc-p/",
             "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSdRlh0WQDefGibQY4cXJY_ctJ3UBWrOA0KsDkMhuIrxVahBWg/viewform?embedded=true"
         }
     }
