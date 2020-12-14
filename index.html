@@ -3,20 +3,118 @@
 
 <head>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Tacotron 2 test</title>
 </head>
 
 <body>
-    <h1>Tacotron2</h1>
-    <audio controls>
-        <source src="examples/training/0011.wav" type="audio/wav">
-        Your browser does not support the audio element.
-    </audio>
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc6GL_uhf40814b47I76mvxr-KPv06dIj1q8HcztfIIDa5W-g/viewform?embedded=true" width="640" height="378" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    <style>
+    audio {
+        height: 40px;
+        width: 250px;
+        margin: 5px;
+    }
+
+    .col-5 {
+        height: 42px;
+    }
+
+    .rmx {
+        height: 55px;
+    }
+    </style>
+    <div id="main_cont" class="container">
+        <h1>Kompiuteriu sintezuoto balso priimtinumo vertinimas.</h1>
+        <div id="main_row" class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-12" style="height:220px">
+                        <p>Apklausa yra skirta įvertinti bei palyginti sintezuotos kalbos rezultatus, gautus ištreniravus Tacotron2 bei Waveglow modelius, naudojant skirtingus parametrus.</p>
+                        <p>Kaip atlikti apklausą?</p>
+                        <ol>
+                            <li> Perklausykite garso poras kairėje</li>
+                            <li> Įvertinkite, kuris iš dviejų garsų yra priimtinesnis(Skamba natūraliau)</li>
+                        </ol>
+                        Garso įrašų poros
+                    </div>
+                </div>
+                <div id="sound_pairs"></div>
+            </div>
+            <div class="col-6" id="ph_form">
+                <iframe id="form_frame" src="" width="700" height="1600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            </div>
+        </div>
+    </div>
     <script>
-    $.getJSON("config.json", function(json) {
-        console.log(json); // this will show the info it in firebug console
+    var json_config;
+    $.getJSON("config.json", function(response) {
+        json_config = response;
     });
+
+    var query_dict = {}
+    location.search.substr(1).split("&").forEach(function(item) { query_dict[item.split("=")[0]] = item.split("=")[1] })
+    //Local - del CORS
+    // json_config = {
+    //     "test1": {
+    //         "description": "A ir B scenariju palyginimas",
+    //         "path_sc_1": "examples/default/",
+    //         "path_sc_2": "examples/lowercase/",
+    //         "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSeQXRYXoiHF7--W8Dv_ywKMfuLHaGFc9N1Zy9X7Q-1-Mx0vwA/viewform?embedded=true"
+    //     },
+    //     "test2": {
+    //         "description": "C ir D scenariju palyginimas",
+    //         "path_sc_1": "examples/krc/",
+    //         "path_sc_2": "examples/krc2/",
+    //         "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSdRlh0WQDefGibQY4cXJY_ctJ3UBWrOA0KsDkMhuIrxVahBWg/viewform?embedded=true"
+    //     }
+    // }
+    test_no = 'test' + query_dict['t']
+    if (query_dict['g'] < 5 && test_no in json_config) {
+        form_url = json_config[test_no]['form_url']
+        end_index = query_dict['g'] * 20 + 1
+        start_index = query_dict['g'] * 20 - 19
+
+        $('#form_frame').attr("src", form_url)
+
+        x = 0
+        use = 1
+        for (i = start_index; i < end_index; i++) {
+
+            if (x == 2) {
+                use = 2
+            } else if (x == 4) {
+                use = 1
+                x = 0
+            }
+            x++
+            if (use == 1) {
+                path_to_1_file = json_config[test_no]['path_sc_1'] + i + ".wav"
+                path_to_2_file = json_config[test_no]['path_sc_2'] + i + ".wav"
+            } else {
+                path_to_1_file = json_config[test_no]['path_sc_2'] + i + ".wav"
+                path_to_2_file = json_config[test_no]['path_sc_1'] + i + ".wav"
+            }
+
+            label = i - start_index + 1
+            $('#sound_pairs').append('<div class="row rmx" style="border-bottom:1px solid black">\
+                        <div class="col-2"><p style="margin-top:19px;font-size:15px">Pora #' + label + '</p></div>\
+                        <div class="col-5"><audio controls><source src="' + path_to_1_file + '" type="audio/wav">\
+                        Your browser does not support the audio element.</audio></div>\
+                        <div class="col-5"> <audio controls><source src="' + path_to_2_file + '" type="audio/wav">\
+                        Your browser does not support the audio element.</audio></div></div>')
+
+        }
+    } else {
+        $('#main_row').hide()
+        for (item in json_config) {
+            $('#main_cont').append('<p>' + json_config[item]['description'] + ' (' + item + ')</p>')
+            for (i = 1; i < 5; i++) {
+                $('#main_cont').append('<a href="?t=' + item.charAt(item.length - 1) + '&g=' + i + '">' + i + ' Grupė</a><br>')
+            }
+            $('#main_cont').append('<br>')
+
+        }
+    }
     </script>
 </body>
 
