@@ -1,1 +1,14 @@
-{"test":"test"}
+ "test1":
+ {
+     "description": "A ir B scenariju palyginimas",
+     "path_sc_1": "examples/default/",
+     "path_sc_2": "examples/lowercase/",
+     "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSeQXRYXoiHF7--W8Dv_ywKMfuLHaGFc9N1Zy9X7Q-1-Mx0vwA/viewform?embedded=true"
+ },
+ "test2":
+ {
+     "description": "C ir D scenariju palyginimas",
+     "path_sc_1": "examples/krc/",
+     "path_sc_2": "examples/krc2/",
+     "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSdRlh0WQDefGibQY4cXJY_ctJ3UBWrOA0KsDkMhuIrxVahBWg/viewform?embedded=true"
+ }
