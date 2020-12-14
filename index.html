@@ -50,7 +50,7 @@
     $.getJSON("config.json", function(response) {
         json_config = response;
     });
-
+    console.log(json_config)
     var query_dict = {}
     location.search.substr(1).split("&").forEach(function(item) { query_dict[item.split("=")[0]] = item.split("=")[1] })
     //Local - del CORS
