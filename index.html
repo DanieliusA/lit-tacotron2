@@ -46,8 +46,6 @@
         </div>
     </div>
     <script>
-    document.cookie = 'grupe='+query_dict['g']
-    console.log(document.cookie)
     json_config = {
         "test1": {
             "description": "A (didžiosios/mažosios - nekirčiuotos) ir B (mažosios - nekirčiuotos) | C (mažosios kirčiuotos) ir D (mažosios kirčiuotos + panašūs garsai)",
@@ -67,6 +65,7 @@
     var query_dict = {}
     location.search.substr(1).split("&").forEach(function(item) { query_dict[item.split("=")[0]] = item.split("=")[1] })
     test_no = 'test' + query_dict['t']
+    document.cookie = 'grupe='+query_dict['g']
     if (query_dict['g'] < 5 && test_no in json_config) {
         form_url = json_config[test_no]['form_url']
 
