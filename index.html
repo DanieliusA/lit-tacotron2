@@ -68,9 +68,10 @@
         test_no = 'test1'
     }
     if ('c1' in query_dict) {
-        var match = document.cookie.match(new RegExp('(^| )grupe=([^;]+)'));
+        var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
         if (match) {
             group_no = match[2]
+            test_no = 'test1'
         } else {
             rand = Math.ceil(Math.random() * 4);
             group_no = rand
