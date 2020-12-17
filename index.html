@@ -61,13 +61,13 @@
     test_no = 'test' + query_dict['t']
     group_no = query_dict['g']
 
-    if ('r1' in query_dict) {
+    if ('r' in query_dict) {
         rand = Math.ceil(Math.random() * 4);
 
         group_no = rand
         test_no = test_no
     }
-    if ('c1' in query_dict) {
+    if ('c' in query_dict) {
         var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
         if (match) {
             group_no = match[2]
