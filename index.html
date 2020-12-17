@@ -65,17 +65,17 @@
         rand = Math.ceil(Math.random() * 4);
 
         group_no = rand
-        test_no = 'test1'
+        test_no = test_no
     }
     if ('c1' in query_dict) {
         var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
         if (match) {
             group_no = match[2]
-            test_no = 'test1'
+            test_no = test_no
         } else {
             rand = Math.ceil(Math.random() * 4);
             group_no = rand
-            test_no = 'test1'
+            test_no = test_no
         }
     }
     document.cookie = "grupe=" + group_no
