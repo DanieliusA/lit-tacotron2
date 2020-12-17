@@ -63,21 +63,21 @@
 
     if ('r1' in query_dict) {
         rand = Math.ceil(Math.random() * 4);
-        document.cookie = rand
+
         group_no = rand
         test_no = 'test1'
     }
-    if ('c1' in query_dict){
-        if (document.cookie){
-            group_no = document.cookie
-        }
-        else{
+    if ('c1' in query_dict) {
+        var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        if (match) {
+            group_no = match[2]
+        } else {
             rand = Math.ceil(Math.random() * 4);
             group_no = rand
             test_no = 'test1'
         }
     }
-
+    document.cookie = "grupe=" + group_no
     if (group_no < 5 && test_no in json_config) {
         form_url = json_config[test_no]['form_url']
 
