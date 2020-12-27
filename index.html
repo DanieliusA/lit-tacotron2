@@ -163,7 +163,7 @@
     } else {
         $('#main_row').hide()
         for (item in json_config) {
-            $('#main_cont').append('<p>' + json_config[item]['description'] + ' (' + item + ')</p>')
+            $('#main_cont').append('<p>' + json_config[item]['description'] + '</p>')
             for (i = 1; i < 5; i++) {
                 $('#main_cont').append('<a href="?t=' + item.charAt(item.length - 1) + '&g=' + i + '">' + i + ' Grupė</a><br>')
             }
