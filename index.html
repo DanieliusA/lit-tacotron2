@@ -83,7 +83,7 @@
     }
     if ('c' in query_dict) {
         var match = document.cookie.match(new RegExp('(^| )grupe=([^;]+)'));
-        if (match) {
+        if (match && match[2]) {
             group_no = match[2]
             test_no = test_no
         } else {
