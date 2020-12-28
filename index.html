@@ -74,17 +74,17 @@
     location.search.substr(1).split("&").forEach(function(item) { query_dict[item.split("=")[0]] = item.split("=")[1] })
     test_no = 'test' + query_dict['t']
     group_no = query_dict['g']
+    var match = document.cookie.match(new RegExp('(^| )grupe=([^;]+)'));
 
     if (!group_no) {
         rand = Math.ceil(Math.random() * 4);
         group_no = rand
     }
-    if ('c' in query_dict) {
-        var match = document.cookie.match(new RegExp('(^| )grupe=([^;]+)'));
-        if (match && match[2]) {
-            group_no = parseInt(match[2]) + 2 > 4 ? parseInt(match[2]) - 2 : parseInt(match[2]) + 2
-        }
+
+    if (match && match[2]) {
+        group_no = parseInt(match[2]) + 2 > 4 ? parseInt(match[2]) - 2 : parseInt(match[2]) + 2
     }
+
     document.cookie = "grupe=" + group_no
     if (group_no < 5 && test_no in json_config) {
         form_url = json_config[test_no]['form_url_' + group_no]
