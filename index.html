@@ -74,15 +74,15 @@
     location.search.substr(1).split("&").forEach(function(item) { query_dict[item.split("=")[0]] = item.split("=")[1] })
     test_no = 'test' + query_dict['t']
     group_no = query_dict['g']
-    var match = document.cookie.match(new RegExp('(^| )grupe=([^;]+)'));
 
     if (!group_no) {
-        rand = Math.ceil(Math.random() * 4);
-        group_no = rand
-    }
-
-    if (match && match[2]) {
-        group_no = parseInt(match[2]) + 2 > 4 ? parseInt(match[2]) - 2 : parseInt(match[2]) + 2
+        var match = document.cookie.match(new RegExp('(^| )grupe=([^;]+)'));
+        if (match && match[2]) {
+            group_no = parseInt(match[2]) + 2 > 4 ? parseInt(match[2]) - 2 : parseInt(match[2]) + 2
+        } else {
+            rand = Math.ceil(Math.random() * 4);
+            group_no = rand
+        }
     }
 
     document.cookie = "grupe=" + group_no
