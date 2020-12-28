@@ -83,7 +83,6 @@
         var match = document.cookie.match(new RegExp('(^| )grupe=([^;]+)'));
         if (match && match[2]) {
             group_no = parseInt(match[2]) + 2 > 4 ? parseInt(match[2]) - 2 : parseInt(match[2]) + 2
-            test_no = test_no
         }
     }
     document.cookie = "grupe=" + group_no
